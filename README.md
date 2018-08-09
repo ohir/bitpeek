@@ -4,11 +4,12 @@
 
 ### Overview
 
-Bitpacked data pretty-formatter. Makes binary headers human readable.
+Bitpacked data pretty-formatter.
 
 Every single input bit from 0 to 63 can print a label that show this bit state.
 Arbitrary group of bits can be printed as decimal, octal or hex numbers and as
 C32s, Ascii7b or UTF8 characters. Plus as an IPv4 address in dot-notation.
+
 Package has no dependencies and is faster than fmt.Sprintf used for identical output.
 
 
@@ -23,16 +24,16 @@ println(string(bitpeek.Snap(
 // Output:
 // Type:5 ext.ACK Id:0x7DF from 222.173.190.239:19726
 	
-//   Benchmark:   277 ns/op  64 B/op 1 allocs/op (Sprintf: 862 ns/op)
+// Benchmark:   277 ns/op  64 B/op 1 allocs/op     (Sprintf: 862 ns/op)
 ```
 
 ### Easy Format String
 
 	    (excerpt)	
-	? - bitlabel with digit 0 or 1
-	> - bitlabel - only if bit is SET
-	< - bitlabel - only if bit is UNSET
-	= - bitlabel lowercased if bit is UNSET  
+	? - show bitlabel with digit 0 or 1 in place of ?
+	> - show bitlabel - only if bit is SET
+	< - show bitlabel - only if bit is UNSET
+	= - show bitlabel in lowercase if bit is UNSET  
 	D - Decimal number
 	H - Hex digit: 0..F
 	C - Character (utf8)
@@ -57,7 +58,6 @@ println(string(bitpeek.Snap(
 
 ### License
 
-See LICENSE file (MIT).
-
+MIT. See LICENSE file.
 
 
