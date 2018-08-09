@@ -1,9 +1,8 @@
-# Bitpeek. Human readable bits.
+## Bitpeek. Human readable bits.
 
-# bitpeek
 `import "github.com/ohir/bitpeek"`
 
-## Overview
+### Overview
 
 Bitpacked data pretty-formatter. Makes binary headers human readable.
 
@@ -16,21 +15,18 @@ Package has no dependencies and is faster than fmt.Sprintf used for identical ou
 Taste it:
 
 ``` go
-	var header uint64 = 0xAfdfDeadBeef4d0e
+var header uint64 = 0xAfdfDeadBeef4d0e
 
-	println(string(bitpeek.Snap(
-
-      `'Type:'F 'EXT=.ACK= Id:0xFHH from IPv4.Address32@:D.16@\n`,
-	  
-	  header)))
+println(string(bitpeek.Snap(
+  `'Type:'F 'EXT=.ACK= Id:0xFHH from IPv4.Address32@:D.16@\n`,header)))
 	
-	// Output:
-	// Type:5 ext.ACK Id:0x7DF from 222.173.190.239:19726
+// Output:
+// Type:5 ext.ACK Id:0x7DF from 222.173.190.239:19726
 	
-	//   Benchmark:   277 ns/op  64 B/op 1 allocs/op (Sprintf: 862 ns/op)
+//   Benchmark:   277 ns/op  64 B/op 1 allocs/op (Sprintf: 862 ns/op)
 ```
 
-## Easy Format String
+### Easy Format String
 
 	    (excerpt)	
 	? - bitlabel with digit 0 or 1
@@ -43,23 +39,23 @@ Taste it:
 	I - IPv4 address
 
 
-## Documentation
+### Documentation
 
 [Documentation](http://godoc.org/github.com/ohir/bitpeek) is hosted at GoDoc project.
 
 
-## Install
+### Install
 
 `go get -u github.com/ohir/bitpeek`
 
 
-## TODO
+### TODO
 
 * Picstring linter. Will be in github.com/ohir/bplint repo.
 * Travis and coverage badges. 
 
 
-## License
+### License
 
 See LICENSE file (MIT).
 
