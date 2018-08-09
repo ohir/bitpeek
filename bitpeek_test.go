@@ -1,5 +1,5 @@
 // Copyright 2018 OHIR-RIPE. All rights reserved.
-// Use of this source code is governed by a MIT 
+// Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
 package bitpeek
@@ -53,7 +53,7 @@ func prettyHX(pic string) (r func(EXThead) []byte) {
 
 // f**d tabs to align. Don't touch last three lines of Output template!
 
-func ExampleSnap_allιCommands() {
+func ExampleSnap_allCommands() {
 	// Show format commands in action:
 	//
 	var hdr uint64 = 0x7841AAbeefFDd37E
@@ -204,7 +204,7 @@ func bigDecTestPictures() {
 		fmt.Printf("{bigF, `Decimal big %d`, `D%d%s%d@`, `%d`, `bigdec`},\n", e, e, fil[0:f], e, n)
 	}
 }
-func ExampleSnap_typeιMethods() {
+func ExampleSnap_typeMethods() {
 	// // Define types:
 	// type EHeader uint16
 	//
@@ -245,7 +245,7 @@ func ExampleSnap_typeιMethods() {
 
 // If a single 'header type' has many forms (bluetooth anyone?) you may
 // use a formatter factory and 'shape' tables:
-func ExampleSnap_formatterιFactory() {
+func ExampleSnap_formatterFactory() {
 	// // Snap a formatter factory for EHeader
 	// func as(pic string) (r func(EHeader) []byte) {
 	// 	 return func(x EHeader) []byte {
@@ -287,7 +287,7 @@ func ExampleSnap_formatterιFactory() {
 // It is possible to use Printf family to show bits albeit we're restricted
 // to 'This:1' 'That:0' indicators. Not to mention poetry of bitshifts
 // and masks that bugs love!
-func ExampleSnap_bitpeekιvsιfmtιPrintf() {
+func ExampleSnap_bitpeekVsFmtPrintf() {
 	// given packet spec:
 	// |63|62|61| 60| 59|58|57|56|55|54|53|52|51|50|49|48| BIT
 	// |GBU Type|ext|ack|           Session  Id          | HEADER
