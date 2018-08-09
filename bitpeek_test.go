@@ -78,7 +78,7 @@ func ExampleSnap_allCommands() {
 `, hdr))
 
 	// print hdr as flags, crc, address :port
-	// I##.###.###.##@ picture is valid too for IPv4.
+	// I##.###.###.32@ picture is valid too for IPv4.
 	fmt.Printf("%s\n\n%s\n",
 		Snap(`(SYN= ACK= ERR= EXT= OVL= RTX= "GG") 'From: 'IPv4.Address32@:D.16@`, hdr),
 		Snap(`--- Snap raCCCCCCD.16@ ns ---`, 0x6e20666f72200e0d))
@@ -246,7 +246,7 @@ func ExampleSnap_typeMethods() {
 // If a single 'header type' has many forms (bluetooth anyone?) you may
 // use a formatter factory and 'shape' tables:
 func ExampleSnap_formatterFactory() {
-	// // Snap a formatter factory for EHeader
+	// // Make a formatter factory for EHeader
 	// func as(pic string) (r func(EHeader) []byte) {
 	// 	 return func(x EHeader) []byte {
 	// 		 return bitpeek.Snap(pic, uint64(x))
