@@ -1,5 +1,5 @@
 // Copyright 2018 OHIR-RIPE. All rights reserved.
-// Use of this source code is governed by a MIT 
+// Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
 // Bitpacked data pretty-formatter. Makes bits human readable. Zero dependencies.
@@ -20,7 +20,7 @@
 //
 // Package has NO dependencies and its parser is under 170 LoC so it is useful
 // where standard "fmt" and "log" packages are too heavy to use (ie. IoT, embed
-// and high-throughtput environments). Parser allocates heap memory only for
+// and high-throughput environments). Parser allocates heap memory only for
 // its output. Pic (format) string is written in left-to-right order (most
 // significant bit, b63 is on the left) so any shorter uint based type can be
 // simply cast and fed to Snap function.
@@ -37,7 +37,7 @@
 //                    Label can contain ESCAPED=<'>? chars. Otherwise
 //                    its just quoted text due to opening '.
 //    unquoted text : Unescaped ABCEFGH@<'>?= characters are commands.
-//                    Escapes \n\t work, other chars are emited as-is.
+//                    Escapes \n\t work, other chars are emitted asis.
 //
 //    COMMANDS
 //         takes : emits                            (emits == outputs)
