@@ -130,19 +130,17 @@ ploop:
 		case asis == 3: // emit label.
 			if w|3 == 63 {
 				asis = 0
-				pi++ // redo
+			} else {
+				oi--
+				ot[oi] = w
 				continue
 			}
-			oi--
-			ot[oi] = w
-			continue
 		case asis == 4: // skip label
 			if w|3 == 63 {
 				asis = 0
-				pi++ // redo
+			} else {
 				continue
 			}
-			continue
 		}
 		switch w { // command
 		case '\'': // 1: quoted
