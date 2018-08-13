@@ -122,25 +122,19 @@ ploop:
 			oi--
 			ot[oi] = w
 			continue
+		case w|3 == 63: // next label ahead
+			asis = 0
 		case asis == 2: // lowercase label
 			if w > 63 && w < 91 {
 				w |= 0x20
 			}
 			fallthrough
 		case asis == 3: // emit label.
-			if w|3 == 63 {
-				asis = 0
-			} else {
-				oi--
-				ot[oi] = w
-				continue
-			}
+			oi--
+			ot[oi] = w
+			continue
 		case asis == 4: // skip label
-			if w|3 == 63 {
-				asis = 0
-			} else {
-				continue
-			}
+			continue
 		}
 		switch w { // command
 		case '\'': // 1: quoted
