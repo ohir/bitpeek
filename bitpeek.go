@@ -148,19 +148,21 @@ ploop:
 			c = 48 + byte(from)&1
 			from >>= 1
 		case 'H': // Hex, usually seen in flock
-		shorth:
-			c = byte(from) & 15
-			if c < 10 {
-				c += 0x30
-			} else {
-				c += 0x37
-			}
-			from >>= 4
-			if pi > 0 && pic[pi-1] == 'H' {
-				pi--
-				oi--
-				ot[oi] = c
-				goto shorth
+			for {
+				c = byte(from) & 15
+				if c < 10 {
+					c += 0x30
+				} else {
+					c += 0x37
+				}
+				from >>= 4
+				if pi > 0 && pic[pi-1] == 'H' {
+					pi--
+					oi--
+					ot[oi] = c
+					continue
+				}
+				break
 			}
 		case 'C': // Character 8bit
 			c = byte(from)
