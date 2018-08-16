@@ -23,7 +23,8 @@
 // and high-throughput environments). Parser allocates heap memory only for
 // its output. Pic (format) string is written in left-to-right order (most
 // significant bit, b63 is on the left) so any shorter uint based type can be
-// simply cast and fed to Snap function.
+// simply cast and fed to Snap function. Bitpeek has an accompanying tool
+// (bplint) you ought to use to validate all picstrings in your source file(s).
 //
 //    BITPEEK FORMAT STRING
 //
@@ -57,6 +58,8 @@
 //    ! -dd bits : SKIP 'dd' bits : Pic is !dd@  (>>dd)    01< dd <63.
 //    @          : dd@ (bitcount) : two digit number of bits to take.
 //
+// Picstrings linter is avaliable at https://github.com/ohir/bplint
+//   go get github.com/ohir/bplint
 package bitpeek
 
 // Func Snap takes a string and an uint64 as input data. It returns byteslice
@@ -91,6 +94,21 @@ package bitpeek
 //
 // ➎ \n\t escapes are always interpreted - even in a quoted text. There is
 // no way to output literal `\n` or `\t`. Don't try.
+//
+// ➏ Annotate all your strings with bplinter tag in form of special comment
+// put ABOVE the line(s) with the pictring itself:
+//
+//   //bitpeek:tag:skip
+//
+// Optional ":tag" field is used to match with linter's -m option.
+// Picstring tags need not to be unique. Optional ":skip" number tells linter
+// to skip a few (up to 7) next strings.  It helps where the picstring in the
+// source is a part of a longer literal:
+//
+//  //bitpeek:sometag:1
+//  {`Example`, `Type:'F 'EXT=.ACK= Id:0xFHH from IPv4.Address32@:D.16@`},
+//
+//  // :1 skips string `Example`
 //
 func Snap(pic string, from uint64) []byte {
 	pi := len(pic)         // pic index
