@@ -44,15 +44,25 @@ println(string(bitpeek.Snap(
 
 [Documentation](http://godoc.org/github.com/ohir/bitpeek) is hosted at GoDoc project.
 
+[Linter docs too](http://godoc.org/github.com/ohir/bplint).
+
 
 ### Install
 
+Install package:
+
 `go get -u github.com/ohir/bitpeek`
 
+Install linter:
 
-### TODO
+`go get -u github.com/ohir/bplint`
 
-* Picstring linter. Will be in github.com/ohir/bplint repo.
+
+### Revisions
+
+  - v1.0.1 - test file annotated for linter, minor cleanups
+  - v1.0.0 - first public release
+
 * Travis and coverage badges. 
 
 
