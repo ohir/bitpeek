@@ -338,124 +338,233 @@ var parseTests = []struct {
 	desc string
 }{
 	// simple commands
+	//bitpeek:simple:1
 	{uAA, `B aa`, `BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB`,
 		`1010101010101010101010101010101010101010101010101010101010101010`, `bits`},
+	//bitpeek:simple:1
 	{u55, `B 55`, `BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB`,
 		`0101010101010101010101010101010101010101010101010101010101010101`, `bits`},
+	//bitpeek:simple:1
 	{uAA, `E aa`, `EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE`, `22222222222222222222222222222222`, `duos`},
+	//bitpeek:simple:1
 	{u55, `E 55`, `EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE`, `11111111111111111111111111111111`, `duos`},
+	//bitpeek:simple:1
 	{0, `E 00`, ` E`, ` 0`, `duos`},
+	//bitpeek:simple:1
 	{3, `E 03`, ` E`, ` 3`, `duos`},
+	//bitpeek:simple:1
 	{uAA, `F aa`, `FFFFFFFFFFFFFFFFFFFFF`, `252525252525252525252`, `tres`},
+	//bitpeek:simple:1
 	{u55, `F 55`, `FFFFFFFFFFFFFFFFFFFFF`, `525252525252525252525`, `tres`},
+	//bitpeek:simple:1
 	{0xFAC688, `F 7..0`, `FFFFFFFF`, `76543210`, `tres`},
+	//bitpeek:simple:1
 	{uAA, `H aa`, `HHHHHHHHHHHHHHHH`, `AAAAAAAAAAAAAAAA`, `hex`},
+	//bitpeek:simple:1
 	{u55, `H 55`, `HHHHHHHHHHHHHHHH`, `5555555555555555`, `hex`},
+	//bitpeek:simple:1
 	{0xFEDCBA9876543210, `H F..0`, `HHHHHHHHHHHHHHHH`, `FEDCBA9876543210`, `hex`},
+	//bitpeek:chars:1
 	{uAA, `A aa`, `AAAAAAAAA`, `*U*U*U*U*`, `ascii`},
+	//bitpeek:chars:1
 	{u55, `A 55`, `AAAAAAAAA`, `U*U*U*U*U`, `ascii`},
+	//bitpeek:chars:1
 	{0x21C30B1C4CB1B3C8, `A !..`, `AAAAAAAAA`, `!aBcDeFgH`, `ascii`},
+	//bitpeek:chars:1
 	{uAA >> 3, `C aa>>3`, `CCCCCCCC`, `~UUUUUUU`, `char`},
+	//bitpeek:chars:1
 	{u55, `C 55`, `CCCCCCCC`, `UUUUUUUU`, `char`},
 	// unserved escapes
+	//bitpeek:escape:1
 	{255, `Patho escape`, `\\A\\tB`, "\\A\\\t1", `patoesc`},
 	// Labels
+	//bitpeek:bitlabel:1
 	{5, `Label no leading '`, `B3:? B2:? B1:? B0:?`, `B3:0 B2:1 B1:0 B0:1`, `label`},
+	//bitpeek:bitlabel:1
 	{5, `Label leading ?`, `?B3:? B2:? B1:? B0:?`, `0B3:0 B2:1 B1:0 B0:1`, `label`},
+	//bitpeek:bitlabel:1
 	{5, `Label leading =`, `=B3:? B2:? B1:? B0:?`, `B3:0 B2:1 B1:0 B0:1`, `label`},
+	//bitpeek:bitlabel:1
 	{5, `Label leading <`, `<B3:? B2:? B1:? B0:?`, `B3:0 B2:1 B1:0 B0:1`, `label`},
+	//bitpeek:bitlabel:1
 	{5, `Label leading >`, `>B3:? B2:? B1:? B0:?`, `B3:0 B2:1 B1:0 B0:1`, `label`},
+	//bitpeek:bitlabel:1
 	{5, `Label leading '=`, `'=B3:? B2:? B1:? B0:?`, `B3:0 B2:1 B1:0 B0:1`, `label`},
+	//bitpeek:bitlabel:1
 	{5, `Label leading '<`, `'<B3:? B2:? B1:? B0:?`, `B3:0 B2:1 B1:0 B0:1`, `label`},
+	//bitpeek:bitlabel:1
 	{5, `Label leading '>`, `'>B3:? B2:? B1:? B0:?`, `B3:0 B2:1 B1:0 B0:1`, `label`},
+	//bitpeek:bitlabel:1
 	{0x55, `Label @=`, `'@=@=@=@=@=@=@=@=`, "`@`@`@`@", `label`}, // R32emu bulblights
+	//bitpeek:bitlabel:1
 	{0xAA, `Label @=`, `'@=@=@=@=@=@=@=@=`, "@`@`@`@`", `label`},
+	//bitpeek:bitlabel escapes:1
 	{0x5, `Label escapes`, `'d\?\<\'\>\=?c\?\<\'\>\=?b\?\<\'\>\=?a\?\<\'\>\=?`, `d?<'>=0c?<'>=1b?<'>=0a?<'>=1`, `label`},
+	//bitpeek:bitlabel escapes:1
 	{0x5, `Label esc 2`, `'\?\<\'\>\=?\?\<\'\>\=?\?\<\'\>\=?\?\<\'\>\=?`, `?<'>=0?<'>=1?<'>=0?<'>=1`, `label`},
+	//bitpeek:bitlabel escapes:1
 	{0x5, `Label esc 3`, `\?\<\'\>\=?\?\<\'\>\=?\?\<\'\>\=?\?\<\'\>\=?`, `?<'>=0?<'>=1?<'>=0?<'>=1`, `label`},
+	//bitpeek:bitlabel escapes:1
 	{0x5, `Label noesc`, `ABCD@EFGH:\?|:\n?|:\t?|\':?`, "ABCD@EFGH:?|:\n1|:\t0|':1", `label`},
+	//bitpeek:bitlabel escapes:1
 	{0x5, `Quoted  esc`, `ABCD@EFGH:\?|:\n?|:\t?|\':?'`, "ABCD@EFGH:?|:\n?|:\t?|':?", `label`},
 	// mixing
+	//bitpeek:mixed:1
 	{0xFEDCBA9876543210, `Mix pic`,
 		`L1? DRUS\E 'L2=L3<L4<L5<L6>L7>L8> HH '\t\nS'\n\t ZA`,
 		"L11 DRUSE l2L4 64 \t\nS\n\t Z~", `mixing`},
 	// bitskip
+	//bitpeek:bitskips:1
 	{0x7D6142634465467B, `H }..{`, `CCCCCCCC`, `}aBcDeF{`, `bitskip`},
+	//bitpeek:bitskips:1
 	{0x7D6142634465465e, `BitSkip`, `CCCCC!16@CC`, `~}aBcF^`, `bitskip`},
+	//bitpeek:bitskips:1
 	{0x7D6142634465467B, `BitSkip zero`, `CCCC!00@CCCC`, `PICERR!DeF{`, `bitskip`},
+	//bitpeek:bitskips:1
 	{0x7D6142634465465e, `BitSkip tail`, `CCCCCCCC!16@`, `~~}aBcDe`, `bitskip`},
+	//bitpeek:bitskips:1
 	{1, `BitSkip err00`, `H!00@`, `CERR!`, `bitskip`},
+	//bitpeek:bitskips:1
 	{1, `BitSkip err65`, `badH!65@`, `PICERR!`, `bitskip`},
 	// Decimal
+	//bitpeek:decimals small:1
 	{0, `Decimal  3b`, `D.03@`, `0`, `decimal`},
+	//bitpeek:decimals small:1
 	{0xAA, `Decimal  0b`, `D.00@`, `CERR!`, `decimal`},
+	//bitpeek:decimals small:1
 	{0xAA, `Decimal  3b`, `D.03@`, `2`, `decimal`},
+	//bitpeek:decimals small:1
 	{0xAA, `Decimal  5b`, `D.05@`, `10`, `decimal`},
+	//bitpeek:decimals small:1
 	{0xAA, `Decimal  7b`, `D.07@`, `42`, `decimal`},
+	//bitpeek:decimals small:1
 	{0xAA, `Decimal  8b`, `D.08@`, `170`, `decimal`},
+	//bitpeek:decimals small:1
 	{0xFade, `Decimal  9b`, `D.09@`, `222`, `decimal`},
+	//bitpeek:decimals small:1
 	{0xFaed, `Decimal 11b`, `D.11@`, `749`, `decimal`},
+	//bitpeek:decimals small:1
 	{0xFaed, `Decimal 13b`, `D.13@`, `6893`, `decimal`},
+	//bitpeek:decimals small:1
 	{0xFaed, `Decimal 15b`, `D.15@`, `31469`, `decimal`},
+	//bitpeek:decimals small:1
 	{0xBaFaed, `Decimal 16b`, `D.16@`, `64237`, `decimal`},
+	//bitpeek:decimals small:1
 	{0xE, `Decimal 16b`, `D. 16@`, `ICERR!`, `decimal err`},
+	//bitpeek:decimals small:1
 	{0xE, `Decimal 16b`, `D16@`, `ERR!`, `decimal err`},
+	//bitpeek:decimals small:1
 	{0xAA, `Decimal 37 err`, `nothing to do D.37@`, `PICERR!`, `decimal`},
+	//bitpeek:decimal bad:1
 	{0xFEDCBA9876543210, `Decimal digit 00@`, `HHHHH!00@HHHHHHHHD.00@HH`, `PICERR!10`, `hex`},
 	// more D digits. Rule is that Opening D need to be separated from .dd@ by
 	// (floor(bits/3)-5) characters:
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 17`, `D..17@`, `131071`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 18`, `D18.18@`, `262143`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 19`, `D19.19@`, `524287`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 20`, `D20.20@`, `1048575`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 21`, `D21..21@`, `2097151`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 22`, `D22..22@`, `4194303`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 23`, `D23..23@`, `8388607`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 24`, `D24...24@`, `16777215`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 25`, `D25...25@`, `33554431`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 26`, `D26...26@`, `67108863`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 27`, `D27....27@`, `134217727`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 28`, `D28....28@`, `268435455`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 29`, `D29....29@`, `536870911`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 30`, `D30.....30@`, `1073741823`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 31`, `D31.....31@`, `2147483647`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 32`, `D32.....32@`, `4294967295`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 33`, `D33......33@`, `8589934591`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 34`, `D34......34@`, `17179869183`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 35`, `D35......35@`, `34359738367`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 36`, `D36.......36@`, `68719476735`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 37`, `D37.......37@`, `137438953471`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 38`, `D38.......38@`, `274877906943`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 39`, `D39........39@`, `549755813887`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 40`, `D40........40@`, `1099511627775`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 41`, `D41........41@`, `2199023255551`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 42`, `D42.........42@`, `4398046511103`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 43`, `D43.........43@`, `8796093022207`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 44`, `D44.........44@`, `17592186044415`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 45`, `D45..........45@`, `35184372088831`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 46`, `D46..........46@`, `70368744177663`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 47`, `D47..........47@`, `140737488355327`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 48`, `D48...........48@`, `281474976710655`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 49`, `D49...........49@`, `562949953421311`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 50`, `D50...........50@`, `1125899906842623`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 51`, `D51............51@`, `2251799813685247`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 52`, `D52............52@`, `4503599627370495`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 53`, `D53............53@`, `9007199254740991`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 54`, `D54.............54@`, `18014398509481983`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 55`, `D55.............55@`, `36028797018963967`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 56`, `D56.............56@`, `72057594037927935`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 57`, `D57..............57@`, `144115188075855871`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 58`, `D58..............58@`, `288230376151711743`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 59`, `D59..............59@`, `576460752303423487`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 60`, `D60...............60@`, `1152921504606846975`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 61`, `D61...............61@`, `2305843009213693951`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 62`, `D62...............62@`, `4611686018427387903`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 63`, `D63................63@`, `9223372036854775807`, `bigdec`},
+	//bitpeek:decimal big:1
 	{bigF, `Decimal big 64`, `D64................64@`, `18446744073709551615`, `bigdec`},
 	// Ip address
-	{0xdeadbeef, `IP v4 err`, `I##.###.###.##@`, `PICERR!`, `IP v4 err`},
-	{0xdeadbeef, `IP v4 ok`, `I##.###.###.32@`, `222.173.190.239`, `IP v4 err`},
-	//
+	//bitpeek:address:1
+	{0xdeadbeef, `IP v4 err`, `IPv4.Addres32@`, `PICERR!`, `IP v4 err`},
+	//bitpeek:address:1
+	{0xdeadbeef, `IP v4 ok`, `IPv4.Address32@`, `222.173.190.239`, `IP v4 err`},
+	// Octals and mixes
+	//bitpeek:octal:1
+	{0xdeadbeef, `Bad octal `, `FFF`, `357`, `char`},
+	//bitpeek:octal:1
+	{0xdeadbeef, `Force Bad octal `, `F''F''F`, `357`, `char`},
 	//	{0x5, `Label `, ``, `x`, `char`},
 }
 
